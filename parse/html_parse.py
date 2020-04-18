@@ -47,18 +47,18 @@ class HtmlParse(object):
         return res_data
 
 
-if __name__ == '__main__':
-    htmlParse = HtmlParse()
-
-    url = "https://baike.baidu.com/item/Python/407313"
-
-    # 解析html成document
-    soup = htmlParse.parse_baike(url)
-
-    # 获取html中的数据
-    res_data = htmlParse.get_html_data(url, soup)
-
-    res_data_url = res_data['url']
-    res_data_title = res_data['title']
-    res_data_summary = res_data['summary']
-    print('url:%s\ntitle:%s\nsummary:%s' % (res_data_url, res_data_title, res_data_summary))
+# if __name__ == '__main__':
+#     htmlParse = HtmlParse()
+#
+#     url = "https://baike.baidu.com/item/Python/407313"
+#
+#     # 解析html成document
+#     soup = htmlParse.parse_baike(url)
+#
+#     # 获取html中的数据
+#     res_data = htmlParse.get_html_data(url, soup)
+#
+#     res_data_url = res_data['url']
+#     res_data_title = res_data['title']
+#     res_data_summary = res_data['summary']
+#     print('url:%s\ntitle:%s\nsummary:%s' % (res_data_url, res_data_title, res_data_summary))
