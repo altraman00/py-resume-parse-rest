@@ -9,8 +9,13 @@ import html_parse
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/hello', methods=['GET'])
 def hello_world():
+    return 'hello world!'
+
+
+@app.route('/resume/parse', methods=['GET'])
+def resume_parse():
     url = "https://baike.baidu.com/item/Python/407313"
     htmlParse = html_parse.HtmlParse()
 
@@ -25,6 +30,9 @@ def hello_world():
     print('url:%s\ntitle:%s\nsummary:%s' % (res_data_url, res_data_title, res_data_summary))
 
     return res_data_summary
+
+
+
 
 
 if __name__ == '__main__':
