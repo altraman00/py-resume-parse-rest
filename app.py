@@ -14,6 +14,11 @@ app = Flask(__name__)
 def hello_world():
     return 'hello world!'
 
+# GET请求url中带参数
+@app.route('/guest/<guest>', methods=['GET'])
+def hello_guest(guest):
+   return 'Hello %s as Guest' % guest
+
 
 # 解析简历的接口
 @app.route('/resume/parse', methods=['GET'])
