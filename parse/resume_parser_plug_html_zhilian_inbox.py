@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 # @Time  : 2020/4/29 10:43
 # @Author: xk
-# @File  : resumeParserPlugHtmlZhilianInbox.py
+# @File  : resume_parser_plug_html_zhilian_inbox.py
 import json
 
 from bs4 import BeautifulSoup
@@ -134,7 +134,7 @@ class ResumeParserPlugHtmlZhilianInbox(object):
         print("姓名:%s\n性别:%s\n年龄:%s\n工作年限:%s\n学历:%s\n当前城市:%s\n户口:%s\n手机:%s\n邮箱:%s"
               % (姓名, 性别, 年龄, 工作年限, 学历, 当前城市, 户口, 手机, 邮箱))
 
-    def getJobHuntBaseInfo(self, 求职意向):
+    def getjobhuntbaseinfo(self, 求职意向):
         soup = self.soupHtml(求职意向)
         keys = soup.find('dl', attrs={'data-bind': "foreach: { data: intents, as: 'intent' }"}).find_all('dt')
         values = soup.find('dl', attrs={'data-bind': "foreach: { data: intents, as: 'intent' }"}).find_all('dd')
@@ -160,7 +160,10 @@ class ResumeParserPlugHtmlZhilianInbox(object):
         pass
 
     def getWorkExpBaseInfo(self, 工作经验):
-        pass
+        '''
+        :param 工作经验:
+        :return:
+        '''
 
     def getEduBaseInfo(self, 教育经历):
             pass

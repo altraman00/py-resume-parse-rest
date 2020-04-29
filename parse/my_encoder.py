@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 # @Time  : 2020/4/29 11:32
 # @Author: xk
-# @File  : MyEncoder.py.py
+# @File  : my_encoder.py.py
 import json
 from time import time
 
