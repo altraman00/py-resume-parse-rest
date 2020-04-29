@@ -16,10 +16,9 @@ class ResumeParserPlugHtmlZhilianInbox(object):
         return html
 
     # 将html简历按照板块区分
-
     def getResumeModuleDict(self, htmlStr):
         moduleDict = {}
-        soup = BeautifulSoup(htmlStr, 'html.parser', from_encoding='utf-8')
+        soup = self.soupHtml(htmlStr)
 
         # ------------------------------------------------基本信息------------------------------------------------
         基本信息_element = soup.find(class_="resume-content__candidate-basic")
@@ -114,22 +113,39 @@ class ResumeParserPlugHtmlZhilianInbox(object):
         培训经历 = moduleDict['培训经历']
         self.getTrainBaseInfo(培训经历)
 
-        # print('\n------------------------------------------------所获证书------------------------------------------------')
-        # 所获证书 = moduleDict['所获证书']
-        #
-        # print('\n------------------------------------------------在校情况------------------------------------------------')
-        # 在校情况 = moduleDict['基本信息']
-        #
-        # print('\n------------------------------------------------语言能力------------------------------------------------')
-        # 语言能力 = moduleDict['语言能力']
+    # 用BeautifulSoup亲吻一遍html
+    def soupHtml(self, baseText):
+        soup = BeautifulSoup(baseText, 'html.parser', from_encoding='utf-8')
+        return soup
 
     def getSeekerBaseInfo(self, 基本信息):
-        soup = BeautifulSoup(基本信息, 'html.parser', from_encoding='utf-8')
+        soup = self.soupHtml(基本信息)
+
+        姓名 = soup.find('span', attrs={'data-bind': 'textQ: candidateName'}).text
         性别 = soup.find('span', attrs={'data-bind': '$key: genderDesc'}).text
-        print("性别:", 性别)
+        年龄 = soup.find('span', attrs={'data-bind': 'text: age'}).text
+        工作年限 = soup.find('span', attrs={'data-bind': 'text: workYears'}).text
+        学历 = soup.find('span', attrs={'data-bind': 'text: eduLevel()'}).text
+        当前城市 = soup.find('span', attrs={'data-bind': 'textQ: currentCity()'}).text
+        户口 = soup.find('span', attrs={'data-bind': 'textQ: hukou()'}).text
+        手机 = soup.find('span', attrs={'data-bind': 'textQ: mobilePhone'}).text
+        邮箱 = soup.find('span', attrs={'data-bind': 'textQ: email'}).text
+
+        print("姓名:%s\n性别:%s\n年龄:%s\n工作年限:%s\n学历:%s\n当前城市:%s\n户口:%s\n手机:%s\n邮箱:%s"
+              % (姓名, 性别, 年龄, 工作年限, 学历, 当前城市, 户口, 手机, 邮箱))
 
     def getJobHuntBaseInfo(self, 求职意向):
-        pass
+        soup = self.soupHtml(求职意向)
+        keys = soup.find('dl', attrs={'data-bind': "foreach: { data: intents, as: 'intent' }"}).find_all('dt')
+        values = soup.find('dl', attrs={'data-bind': "foreach: { data: intents, as: 'intent' }"}).find_all('dd')
+        jobHuntDict = {}
+        for key_index, key_info in enumerate(keys):
+            key = key_info.text
+            val = values[key_index]
+            jobHuntDict[key] = val.text
+
+        print('jobHuntDict',jobHuntDict)
+
 
     def getTrainBaseInfo(self, 培训经历):
         pass
@@ -147,7 +163,7 @@ class ResumeParserPlugHtmlZhilianInbox(object):
         pass
 
     def getEduBaseInfo(self, 教育经历):
-        pass
+            pass
 
 
 if __name__ == '__main__':
