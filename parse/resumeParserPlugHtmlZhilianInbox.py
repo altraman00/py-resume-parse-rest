@@ -80,6 +80,8 @@ class ResumeParserPlugHtmlZhilianInbox(object):
         print(moduleJson)
 
 
+
+
 if __name__ == '__main__':
     zhilian = ResumeParserPlugHtmlZhilianInbox()
     htmlPath = '/Users/admin/Desktop/简历解析/智联招聘/智联招聘-插件-已下载模块-openFrom-2-李宁-直接报错.html'
